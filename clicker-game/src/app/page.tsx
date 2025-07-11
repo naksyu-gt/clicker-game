@@ -6,11 +6,8 @@ export default function Home() {
       {/* ヘッダー部分 */}
       <header className="text-center mb-8">
         <h1 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-lg">
-          🍪 Cookie Clicker Game
+          🍪 Cookie Clicker
         </h1>
-        <p className="text-gray-300 text-lg">
-          React + Next.js + TypeScriptで作るモダンなクリッカーゲーム
-        </p>
       </header>
 
       {/* メインのゲームコンポーネント */}

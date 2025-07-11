@@ -1,4 +1,4 @@
-# 🍪 Cookie Clicker Game
+# 🍪 Cookie Clicker
 
 React + Next.js + TypeScriptで作るクリッカーゲームです。ゲームを作りながら、モダンなWeb開発技術を学習できます。
 

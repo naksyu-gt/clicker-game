@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "🍪 Cookie Clicker Game",
+  title: "🍪 Cookie Clicker",
   description: "モダンなクッキークリッカーゲーム - クッキーをクリックして、アップグレードを購入して、より多くのクッキーを生産しよう！",
 };
 
