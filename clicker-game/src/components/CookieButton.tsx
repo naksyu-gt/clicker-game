@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FloatingCookie } from '../types/game';
 
 interface CookieButtonProps {
@@ -9,6 +9,7 @@ interface CookieButtonProps {
 // メインのクッキーボタンと浮遊アニメーションを管理するコンポーネント
 export const CookieButton = ({ clickPower, onCookieClick }: CookieButtonProps) => {
   const [floatingCookies, setFloatingCookies] = useState<FloatingCookie[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // 2秒経過した浮遊アニメーションを削除
   useEffect(() => {
@@ -23,24 +24,26 @@ export const CookieButton = ({ clickPower, onCookieClick }: CookieButtonProps) =
 
   // クッキーをクリックした時の処理
   const handleClick = (event: React.MouseEvent) => {
-    // クリック位置を取得
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    if (containerRef.current) {
+      // コンテナ要素を基準とした相対座標を計算
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const x = event.clientX - containerRect.left;
+      const y = event.clientY - containerRect.top;
 
-    // 新しい浮遊アニメーションを追加
-    setFloatingCookies(prev => [...prev, {
-      id: Date.now(),
-      x,
-      y,
-      value: clickPower
-    }]);
+      // 新しい浮遊アニメーションを追加
+      setFloatingCookies(prev => [...prev, {
+        id: Date.now(),
+        x,
+        y,
+        value: clickPower
+      }]);
+    }
 
     onCookieClick(event);
   };
 
   return (
-    <div className="text-center mb-8 relative">
+    <div ref={containerRef} className="text-center mb-8 relative">
       <button
         onClick={handleClick}
         className="bg-yellow-400 hover:bg-yellow-500 transition-colors duration-200 rounded-full p-8 shadow-lg transform hover:scale-105 active:scale-95 relative"
