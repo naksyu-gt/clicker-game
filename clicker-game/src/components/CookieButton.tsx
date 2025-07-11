@@ -46,16 +46,16 @@ export const CookieButton = ({ clickPower, onCookieClick }: CookieButtonProps) =
     <div ref={containerRef} className="text-center mb-8 relative">
       <button
         onClick={handleClick}
-        className="bg-yellow-400 hover:bg-yellow-500 transition-colors duration-200 rounded-full p-8 shadow-lg transform hover:scale-105 active:scale-95 relative"
+        className="bg-gradient-to-br from-yellow-400 to-yellow-600 hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300 rounded-full p-12 shadow-2xl transform hover:scale-110 active:scale-95 relative border-4 border-yellow-300 hover:border-yellow-200"
       >
-        <span className="text-6xl">🍪</span>
+        <span className="text-8xl drop-shadow-lg">🍪</span>
       </button>
       
       {/* 浮遊するクッキーアニメーション */}
       {floatingCookies.map(cookie => (
         <div
           key={cookie.id}
-          className="absolute pointer-events-none text-green-500 font-bold animate-bounce"
+          className="absolute pointer-events-none text-yellow-300 font-bold text-xl drop-shadow-lg"
           style={{
             left: cookie.x,
             top: cookie.y,
@@ -66,18 +66,22 @@ export const CookieButton = ({ clickPower, onCookieClick }: CookieButtonProps) =
         </div>
       ))}
       
-      <p className="mt-4 text-gray-600">クリックしてクッキーを獲得！</p>
+      <p className="mt-6 text-gray-300 text-lg font-medium">クリックしてクッキーを獲得！</p>
 
       {/* 浮遊アニメーション用のCSS */}
       <style jsx>{`
         @keyframes floatUp {
           0% {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
+          }
+          50% {
+            opacity: 0.8;
+            transform: translateY(-25px) scale(1.1);
           }
           100% {
             opacity: 0;
-            transform: translateY(-50px);
+            transform: translateY(-50px) scale(0.8);
           }
         }
       `}</style>

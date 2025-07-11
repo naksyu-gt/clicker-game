@@ -11,35 +11,40 @@ interface UpgradeShopProps {
 // アップグレードショップを表示するコンポーネント
 export const UpgradeShop = ({ upgrades, cookies, onUpgradePurchase, onReset }: UpgradeShopProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-bold text-gray-800">🏪 アップグレードショップ</h3>
+    <div className="bg-gray-900 border border-gray-700 rounded-xl shadow-2xl p-8 mb-6 backdrop-blur-sm">
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-2xl font-bold text-yellow-400">🏪 アップグレードショップ</h3>
         <button
           onClick={onReset}
-          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors duration-200"
+          className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-6 py-3 rounded-lg transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
         >
           リセット
         </button>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {upgrades.map(upgrade => (
-          <div key={upgrade.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow duration-200">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-2xl">{upgrade.icon}</span>
-              <h4 className="font-semibold text-gray-800">{upgrade.name}</h4>
+          <div key={upgrade.id} className="bg-gray-800 border border-gray-600 rounded-xl p-6 hover:shadow-xl transition-all duration-300 hover:border-gray-500 hover:bg-gray-750">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-3xl">{upgrade.icon}</span>
+              <h4 className="font-bold text-gray-100 text-lg">{upgrade.name}</h4>
             </div>
-            <p className="text-sm text-gray-600 mb-2">{upgrade.description}</p>
-            <p className="text-sm text-gray-500 mb-2">
-              所持数: {upgrade.owned} | コスト: {formatNumber(upgrade.cost)} クッキー
-            </p>
+            <p className="text-gray-300 text-sm mb-4 leading-relaxed">{upgrade.description}</p>
+            <div className="bg-gray-700 rounded-lg p-3 mb-4">
+              <p className="text-gray-400 text-xs mb-1">所持数</p>
+              <p className="text-blue-400 font-semibold">{upgrade.owned}</p>
+            </div>
+            <div className="bg-gray-700 rounded-lg p-3 mb-4">
+              <p className="text-gray-400 text-xs mb-1">コスト</p>
+              <p className="text-yellow-400 font-semibold">{formatNumber(upgrade.cost)} クッキー</p>
+            </div>
             <button
               onClick={() => onUpgradePurchase(upgrade.id)}
               disabled={cookies < upgrade.cost}
-              className={`w-full py-2 px-4 rounded ${
+              className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
                 cookies >= upgrade.cost
-                  ? 'bg-blue-500 hover:bg-blue-600 text-white'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              } transition-colors duration-200`}
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white shadow-lg hover:shadow-xl transform hover:scale-105'
+                  : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+              }`}
             >
               購入
             </button>
